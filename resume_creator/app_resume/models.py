@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+
+
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     experience_count = models.IntegerField(default=0) 
     project_count = models.IntegerField(default=0)
     position = models.CharField(max_length=50)
@@ -20,7 +22,6 @@ class Profile(models.Model):
     
 class Experience(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE)
-    Profile = models.ForeignKey(User , on_delete=models.CASCADE)
     title  = models.CharField(null=True , max_length=50)
     description = models.TextField(null=True , max_length=200)
     employer = models.CharField(null=True , max_length=50)
@@ -31,11 +32,11 @@ class Experience(models.Model):
     
 class Skill(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE)
-    title = models.CharField(null=True , on_delete= models.CASCADE)
+    title = models.CharField(null=True )
     description = models.TextField(null=True , max_length=200)
     image = models.ImageField(upload_to='skills' , null=True)
     
-class Eduction(models.Model):
+class Education(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE)
     title = models.CharField(null=True , max_length=50)
     description = models.TextField(null=True , max_length=200)
