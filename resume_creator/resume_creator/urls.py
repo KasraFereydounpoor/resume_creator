@@ -22,4 +22,5 @@ from app_resume import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('' , include('app_resume.urls')),
+    path("accounts/" , include("django.contrib.auth.urls")),
 ]
