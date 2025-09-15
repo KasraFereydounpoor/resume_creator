@@ -20,26 +20,51 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="container profile-container appbar">
-        <div class="row">
-          <div id="menu-jk" class="col-md-12">
-            <div class="pro-s-cover">
-                  <a href="{% url 'logout' %}" class="btn btn-outline-dark">
-                    Logout
-                  </a>
-                </div>
+<div class="container-fluid">
+  <div class="container profile-container appbar">
+    <div class="row">
+      <div id="menu-jk" class="col">
+        <div class="pro-s-cover">
+          <div class="row justify-content-between">
+            <div class="col-4">
+              {% if user.is_authenticated %}
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-dark">
+                  Logout
+                </button>
+              </form>
+              {% else %}
+              <a href="{% url 'login' %}" class="btn btn-outline-dark">
+                Login
+              </a>
+              {% endif %}
+            </div>
+            <div class="col-4">
+              <a href="#" class="btn btn-outline-dark">
+                Templates
+              </a>
+              <a href="#" class="btn btn-outline-dark">
+                Edit
+              </a>
+              <a href="#" class="btn btn-outline-dark">
+                Home
+              </a>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
     <div class="container-fluid">
       <div class="container profile-container">
         <div class="row">
           <div id="menu-jk" class="col-md-4">
             <div class="pro-s-cover">
               <img src='{% static "app_resume/assets/images/profile.jpg" %}' alt="" />
-              <h6>Andrew Smith</h6>
+              <h6>{{ user }}</h6>
               <span>Freelancer</span>
               <p>Web Designer</p>
               <div class="num-box w-100 d-flex">
