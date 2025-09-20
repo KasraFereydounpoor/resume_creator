@@ -27,4 +27,6 @@ app_name = 'app_resume'
 urlpatterns = [
     path('' , views.index),
     path('resume' , views.resume , name="resume"),
+    path('edit' , views.edit , name="edit"),
+
 ] + static(settings.STATIC_URL , document_root=settings.STATIC_ROOT)
