@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from app_resume.forms import ResumeForm
+from app_resume.models import Profile
+from django.contrib import messages
 
 def index(request):
     return render(request , 'index.html')
