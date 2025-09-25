@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.dispatch import receiver
 from app_resume.models import Profile
 
+
 User = get_user_model()
 
 @receiver(post_save, sender=User)
