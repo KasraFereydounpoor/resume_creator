@@ -1,56 +1,61 @@
 {% extends 'index.html' %}
 {% load widget_tweaks %}
 
+{% block extra_css %}
+{{ block.super }}
+<style>
+  .form-container {
+    height: calc(100vh - 78px);
+    display: flex;
+    align-items: center;
+  }
+</style>
+{% endblock extra_css %}
+
+
 {% block content %}
 <div class="container-fluid">
-    <div class="container profile-container appbar">
-        <div class="row">
-            <div id="menu-jk" class="col">
-                <div class="pros-cover">
-                    <div class="row justify-content-between">
-                        <div class="col">
-                            <h2>Log In</h2>
-                            <form method="post" novalidate>
-                                {% csrf_token %}
-                                
-                                <div class="form-group">
-                                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                                    {% render_field form.username class+="form-control" %}
-                                    {% if form.username.errors %}
-                                    <div class="text-danger">
-                                        {{ form.username.errors }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
-                                    {% render_field form.password class+="form-control" %}
-                                    {% if form.password.errors %}
-                                    <div class="text-danger">
-                                        {{ form.password.errors }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                
-                                <div class="form-check">
-                                    {% render_field form.remember_me class+="form-check-input" id="exampleCheck1" %}
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                
-                                {% if form.non_field_errors %}
-                                <div class="text-danger">
-                                    {{ form.non_field_errors }}
-                                </div>
-                                {% endif %}
-
-                            </form>
-                        </div>
-                    </div>
+  <div class="container profile-container appbar">
+    <div class="row form-container">
+      <div class="col-4"></div>
+      <div id="menu-jk" class="col-4">
+        <div class="pro-s-cover">
+          <div class="row justify-content-between">
+            <div class="col">
+              <form method="post">
+                <div class="form-group">
+                  <input class="form-control" id="{{ form.username.name }}" placeholder="Enter Username" name="{{ form.username.name }}">
                 </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="{{ form.password.name }}" placeholder="Password" name="{{ form.password.name }}">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                {% csrf_token %}
+              </form>
+              <!-- <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="username">{{ form.username.label }}</label>
+                  {% render_field form.username class+="form-control" %}                  
+                </div>
+                <div class="form-group">
+                  <label for="password">{{ form.password.label }}</label>
+                  {% render_field form.password class+="form-control" %}                  
+                </div>
+                {% if form.errors %}
+                <p class="text-danger">
+                  Please enter a correct username and password. Note that both fields may be case-sensitive
+                </p>
+                {% endif %}
+                <br />
+                <button type="submit" class="btn btn-outline-dark">Log In</button>
+              </form> -->
             </div>
+          </div>
         </div>
+      </div>
+      <div class="col-4"></div>
     </div>
+  </div>
 </div>
 {% endblock content %}
